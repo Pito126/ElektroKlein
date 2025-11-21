@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 - Stránka nenalezena</title>
+<!-- Google Fonts: Roboto + Rye -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Rye&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<link rel="shortcut icon" href="../imgs/logoKvet-white.png" type="image/x-icon">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+/* Minihra styly */
+.mini-game {
+    max-width: 600px;
+    margin: 40px auto;
+    text-align: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(220, 53, 69, 0.3);
+}
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 20px auto;
+    max-width: 300px;
+}
+.game-btn {
+    width: 80px;
+    height: 80px;
+    background: #333;
+    border: 2px solid var(--accent-red);
+    border-radius: 50%;
+    color: var(--text-light);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+.game-btn:hover {
+    transform: scale(1.1);
+}
+.game-btn.active {
+    background: var(--accent-red);
+    box-shadow: 0 0 20px var(--accent-red);
+}
+.game-status {
+    font-size: 1.2rem;
+    margin: 20px 0;
+    min-height: 20px;
+}
+.game-success {
+    color: var(--accent-red);
+    font-weight: bold;
+}
+@media (max-width: 768px) {
+    .game-board {
+        max-width: 240px;
+    }
+    .game-btn {
+        width: 60px;
+        height: 60px;
+    }
+}
+</style>
+</head>
+<body>
+<div id="particles-js"></div>
+<header>
+<div class="home-button">
+    <a href="../index.html">
+    <div class="header-logo">
+<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+    <path d="M7 17v-5h10v5M6 12h12"></path>
+</svg>
+<span style="color:white;">ElektroKlein</span>
+    </div>
+    </a>
+</div>
+<h1 class="header-title momo-trust-display-regular">Stránka nenalezena</h1>
+<div class="header-nav">
+</div>
+</header>
+
+<section class="section-box">
+<div style="text-align: center; margin: 40px 0;">
+    <h3 style="font-family: 'Rye', cursive; color: var(--accent-red); text-shadow: 0 0 15px var(--accent-red); font-size: 10rem; margin: 0;">404</h3>
+</div>
+
+<!-- Minihra: Zapoj obvod -->
+<div class="mini-game">
+<h3>Zajímavost: Zapoj obvod a najdi cestu domů!</h3>
+<p>Klikni na 3 "senzory" v pořadí (červený, modrý, zelený) a aktivuj "návratový obvod". To je jednoduchá simulace I2C komunikace z mých projektů!</p>
+<div class="game-board">
+    <button class="game-btn" data-color="red">🔴</button>
+    <button class="game-btn" data-color="blue">🔵</button>
+    <button class="game-btn" data-color="green">🟢</button>
+</div>
+<div class="game-status" id="gameStatus">Klikni na červený senzor jako první...</div>
+<a href="../index.html" id="successLink" class="project-link" style="display: none; margin-top: 20px;">Návratový obvod aktivován! Zpět domů</a>
+</div>
+</section>
+
+<footer>© 2025 Dominik Klein</footer>
+
+<script src="scripts/script.js"></script>
+<script>
+// Jednoduchá mini hra
+const sequence = ['red', 'blue', 'green'];
+let step = 0;
+const statusEl = document.getElementById('gameStatus');
+const successLink = document.getElementById('successLink');
+const buttons = document.querySelectorAll('.game-btn');
+
+buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const color = btn.dataset.color;
+        if (color === sequence[step]) {
+            btn.classList.add('active');
+            step++;
+            statusEl.textContent = step === 1 ? 'Dobře! Teď modrý...' : step === 2 ? 'Skvěle! Nakonec zelený...' : 'Úspěch! Obvod je zapojen.';
+            if (step === 3) {
+                statusEl.textContent = 'Obvod aktivován! Nyní se můžeš vrátit.';
+                statusEl.classList.add('game-success');
+                successLink.style.display = 'inline-block';
+                buttons.forEach(b => b.disabled = true);
+            }
+        } else {
+            step = 0;
+            buttons.forEach(b => b.classList.remove('active'));
+            statusEl.textContent = 'Špatný pořadí! Začni znovu od červeného.';
+        }
+    });
+});
+</script>
+</body>
+</html>
