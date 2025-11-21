@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nástroje a Zdroje - Moje Elektrotechnické Projekty</title>
+<!-- Google Fonts: Roboto + Rye -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Rye&display=swap" rel="stylesheet">
+<!-- Font Awesome pro ikony -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="icon" type="image/x-icon" href="/imgs/logoKvet-white.png">
+</head>
+<body>
+<div id="particles-js"></div>
+<header>
+<div class="home-button">
+    <a href="../index.html">
+    <div class="header-logo">
+<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+    <path d="M7 17v-5h10v5M6 12h12"></path>
+</svg>
+<span style="color:white;">ElektroKlein</span>
+    </div>
+    </a>
+</div>
+<h1 class="header-title momo-trust-display-regular">Nástroje a Obchody</h1>
+<div class="header-nav">
+<a href="../index.html">Projekty</a>
+<a href="../pages/tools.html">Pomůcky</a>
+<a href="../pages/contact.html">Kontakt</a>
+</div>
+</header>
+
+<section class="section-box">
+<h2>Používané nástroje</h2>
+<p class="project-desc">Přehled programů pro design, modelování a programování – vše zdarma a snadno dostupné pro tvorbu elektro projektů.</p>
+
+<div class="tools-grid">
+    <!-- Tinkercad karta -->
+    <div class="tool-card">
+        <img src="https://www.tinkercad.com/favicon.ico" alt="Logo tinkercad" class="tool-logo">
+        <h3>Tinkercad</h3>
+        <p>Jednoduché 3D modelování a prototypování (ideální pro začátečníky).</p>
+        <a href="https://www.tinkercad.com/" target="_blank" class="tool-link">Navštívit</a>
+    </div>
+    
+    <!-- KiCad karta -->
+    <div class="tool-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/KiCad_logo_square.svg/2048px-KiCad_logo_square.svg.png" alt="KiCad logo" class="tool-logo">
+        <h3>KiCad</h3>
+        <p>Profesionální návrh PCB schémat a desek plošných spojů.</p>
+        <a href="https://www.kicad.org/" target="_blank" class="tool-link">Navštívit</a>
+    </div>
+    
+    <!-- Arduino IDE karta -->
+    <div class="tool-card">
+        <img src="https://cdn.worldvectorlogo.com/logos/arduino-1.svg" alt="Arduino logo" class="tool-logo">
+        <h3>Arduino IDE</h3>
+        <p>Oficiální prostředí pro programování Arduino a ESP32.</p>
+        <a href="https://www.arduino.cc/en/software" target="_blank" class="tool-link">Navštívit</a>
+    </div>
+</div>
+
+<h2>Obchody se součástkami</h2>
+<p class="project-desc">Doporučené e-shopy pro ESP32, senzory a další komponenty – české pro rychlost, globální pro ceny.</p>
+
+<div class="tools-grid">
+    <!-- Dratek karta -->
+    <div class="tool-card">
+        <img src="https://dratek.cz/img/dratek_cz/favicon/apple-icon-57x57.png" alt="Dratek logo" class="tool-logo">
+        <h3>Dratek.cz</h3>
+        <p>Široký výběr senzorů a displejů.</p>
+        <a href="https://dratek.cz/" target="_blank" class="tool-link">Navštívit</a>
+    </div>
+    
+    <!-- LaskaKit karta -->
+    <div class="tool-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoAUOxS_AagVkdquZbr9HexH8jtBAhuNwpfw&s" alt="LaskaKit logo" class="tool-logo">
+        <h3>LaskaKit.cz</h3>
+        <p>České Arduino/ESP32 sady a stavebnice.</p>
+        <a href="https://www.laskakit.cz/" target="_blank" class="tool-link">Navštívit</a>
+    </div>
+    
+    <!-- AliExpress karta -->
+    <div class="tool-card">
+        <img src="https://logodix.com/logo/395288.png" alt="Aliexpress logo" class="tool-logo">
+        <h3>AliExpress</h3>
+        <p>Levné komponenty pro začítečníky</p>
+        <a href="https://www.aliexpress.com/" target="_blank" class="tool-link">Navštívit</a>
+    </div>
+</div>
+</section>
+
+<!-- Modal lightbox (pro konzistenci) -->
+<div id="imageModal" class="modal">
+<span class="close" onclick="closeModal()">&times;</span>
+<img class="modal-content" id="modalImg">
+</div>
+
+<footer>© 2025 Dominik Klein</footer>
+
+<script src="../scripts/script.js"></script>
+</body>
+</html>

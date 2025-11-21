@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gryoskopický ovladač</title>
+<!-- Google Fonts: Roboto + Rye -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Rye&display=swap" rel="stylesheet">
+<link rel="icon" type="image/x-icon" href="/imgs/logoKvet-white.png">
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div id="particles-js"></div>
+<header>
+<div class="home-button">
+    <a href="../index.html">
+    <div class="header-logo">
+<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+    <path d="M7 17v-5h10v5M6 12h12"></path>
+</svg>
+<span style="color:white;">ElektroKlein</span>
+    </div>
+    </a>
+</div>
+<h1 class="header-title momo-trust-display-regular">Gryoskopický ovladač</h1>
+<div class="header-nav">
+<a href="../index.html">Projekty</a>
+<a href="../pages/tools.html">Pomůcky</a>
+<a href="../pages/contact.html">Kontakt</a>
+</div>
+</header>
+
+<section class="section-box">
+<h2>Popis projektu</h2>
+<p class="project-desc">Bezdrátový ovladač využívající gyroskop pro řízení pohybu externího auta. Používá ESP32 pro WiFi a Bluetooth komunikaci. Ovladač se nachází fyzicky ve dvou možnostech. První možností je využít ovladač jako handheld zařízení. Druhou možností je jej využít ve formě rukavice, obě varianty jsou zajímavé, ale jinak složité. Program je jednodušše upravitelný pro různé druhy OLED displejů. Gyroskop společně s OLED displejem jsou ovládány přes I2C knihovnu Wire.</p>
+<ul class="tech-list">
+<li><b>ESP32</b> pro WiFi komunikaci</li>
+<li><b>MPU6050</b> gyroskopický senzor</li>
+<li><b>OLED</b> displej jakéhokoliv typu</li>
+<li><b>Rezistory</b> dělič napětí pro zobrazení stavu baterie</li>
+<li><b>Regulátor</b> pro snížení nebo udržení hodnoty na logické úrovni vybraných součástek</li>
+<li><b>Tlačíko</b> pro přepínání stránek displeje</li>
+<li><b>Spínač</b> pro vypnutí a zapnutí obvodu</li>
+<li><b>TP4056</b> nabíjecí obvod pro jednoduché nabíjení USB-C</li>
+<li><b>Li-po</b> baterie, která bude živit celý obvod</li>
+</ul>
+<div class="results">Funkce: Detekce pohybu s přesností ±2°, výsledky: Úspěšné ovládání RC modelu na vzdálenost 50m.</div>
+<center><a href="https://github.com/Pito126/Gyroscopic-controller" style="text-decoration: none;" class="github-link" target="_blank">Soubory projektu</a></center>
+
+<h2>Fotky a diagramy</h2>
+<div class="images-grid">
+    <!-- 3D model PCB -->
+<img src="/project1/Gyroscopic controller - pcb.png" alt="Schéma PCB" onclick="openModal(this.src, '../../project1/Gyroscopic-controller-scheme-pcb.pdf')" style="cursor: pointer;">
+<!-- Schéma -->
+<img src="/project1/Gyroscopic-controller-scheme.png" alt="Schématické zapojení" onclick="openModal(this.src, '../../project1/Gyroscopic-controller-scheme.pdf')" style="cursor: pointer;">
+<!-- Real fotky -->
+<img src="https://i0.wp.com/randomnerdtutorials.com/wp-content/uploads/2021/01/ESP32-MPU6050-Accelerometer-Gyroscope-Temperature-Sensor.png?quality=100&strip=all&ssl=1" alt="Real foto setupu ESP32 s MPU6050" onclick="openModal(this.src, null)" style="cursor: pointer;">
+<img src="https://i0.wp.com/randomnerdtutorials.com/wp-content/uploads/2021/01/MPU-6050-Accelerometer-Gyroscope-Temperature-Sensor-Demonstration.png?quality=100&strip=all&ssl=1" alt="Demonstrace real setupu" onclick="openModal(this.src, null)" style="cursor: pointer;">
+
+</div>
+</section>
+
+<!-- Modal lightbox -->
+<div id="imageModal" class="modal">
+<span class="close" onclick="closeModal()">&times;</span>
+<img class="modal-content" id="modalImg">
+<div class="modal-footer" id="modalFooter" style="display: none;">
+    <button id="fullViewBtn" class="tool-link">Zobrazit PDF</button>
+</div>
+</div>
+
+<footer>© 2025 Dominik Klein</footer>
+
+<script src="../scripts/script.js"></script>
+</body>
+</html>

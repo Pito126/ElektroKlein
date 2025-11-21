@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RC auto - Moje Elektrotechnické Projekty</title>
+<!-- Google Fonts: Roboto + Rye -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Rye&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="icon" type="image/x-icon" href="/imgs/logoKvet-white.png">
+</head>
+<body>
+<div id="particles-js"></div>
+<header>
+<div class="header-logo">
+<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+    <path d="M7 17v-5h10v5M6 12h12"></path>
+</svg>
+<span>ElektroKlein</span>
+</div>
+<h1 class="header-title momo-trust-display-regular">RC auto</h1>
+<div class="header-nav">
+<a href="../index.html">Projekty</a>
+<a href="../pages/contact.html">Kontakt</a>
+<a href="../pages/tools.html">Pomůcky</a>
+</div>
+</header>
+
+<section class="section-box">
+<h2>Popis projektu</h2>
+<p class="project-desc">Autonomní RC auto s ovládáním přes app a autonomní navigací. Používá TT motory a L298N driver.</p>
+<ul class="tech-list">
+<li>ESP32 jako hlavní mikrokontrolér</li>
+<li>TT motory pro pohon</li>
+<li>L298N motor driver</li>
+<li>Li-ion baterie 3.7V 2000mAh</li>
+</ul>
+<a href="https://github.com/tvoje-username/rc-car" class="github-link" target="_blank">Kód na GitHub</a>
+<div class="results">Funkce: Rychlost až 1m/s, výsledky: Stabilní jízda v interiéru s překážkami.</div>
+
+<h2>Fotky a diagramy</h2>
+<div class="images-grid">
+<!-- Real fotky -->
+<img src="https://via.placeholder.com/600x400/1a1a1a/DC3545?text=Real+Foto+RC+Auto+s+TT+Motory" alt="Real foto RC auta" onclick="openModal(this.src)" style="cursor: pointer;">
+<!-- 3D model PCB -->
+<img src="RC Car - pcb.png" alt="3D model PCB" onclick="openModal(this.src)" style="cursor: pointer;">
+<!-- Schéma -->
+<img src="RC-Car-scheme.png" alt="Schématické zapojení L298N s ESP32" onclick="openModal(this.src)" style="cursor: pointer;">
+</div>
+</section>
+
+<!-- Modal lightbox -->
+<div id="imageModal" class="modal">
+<span class="close" onclick="closeModal()">&times;</span>
+<img class="modal-content" id="modalImg">
+</div>
+
+<footer>© 2025 [Tvoje Jméno]</footer>
+
+<script src="../scripts/script.js"></script>
+</body>
+</html>
