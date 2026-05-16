@@ -3,128 +3,371 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nástroje a Zdroje - Moje Elektrotechnické Projekty</title>
-<!-- Google Fonts: Roboto + Rye -->
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Rye&display=swap" rel="stylesheet">
-<!-- Font Awesome pro ikony -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<title>Pomůcky — ElektroKlein</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Rye&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <link rel="stylesheet" href="../css/style.css">
-<link rel="icon" type="image/x-icon" href="/imgs/logoKvet-white.png">
+<link rel="icon" type="image/x-icon" href="../imgs/logoKvet-white.png">
+<style>
+  .page-outer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 0 1.5rem;
+  }
+
+  .page-wrapper {
+    width: 100%;
+    max-width: 860px;
+    padding: 2.5rem 0 4rem;
+    box-sizing: border-box;
+  }
+
+  .cv-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #e05a2b;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 1.4rem;
+  }
+
+  .cv-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+  }
+
+  .section-desc {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.5);
+    margin: -0.8rem 0 1.6rem;
+    max-width: 580px;
+  }
+
+  .cv-section { margin-bottom: 3rem; }
+
+  /* ── Cards grid ── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+
+  @media (max-width: 500px) {
+    .cards-grid { grid-template-columns: 1fr; }
+  }
+
+  .tool-card {
+    display: flex;
+    flex-direction: column;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 16px;
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .tool-card:hover {
+    border-color: #e05a2b;
+    transform: translateY(-2px);
+  }
+
+  .tool-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .tool-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .tool-icon img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+  }
+
+  .tool-name {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+  }
+
+  .tool-desc {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.5);
+    margin: 0 0 12px;
+    flex: 1;
+  }
+
+  .tool-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: #e05a2b;
+    text-decoration: none;
+  }
+
+  .tool-link svg {
+    width: 11px; height: 11px;
+    stroke: #e05a2b; fill: none; stroke-width: 2.5;
+    transition: transform 0.15s;
+  }
+
+  .tool-card:hover .tool-link svg { transform: translateX(3px); }
+
+  /* ── PDF cards ── */
+  .pdf-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+  }
+
+  .pdf-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .pdf-card:hover {
+    border-color: #e05a2b;
+    transform: translateY(-2px);
+  }
+
+  .pdf-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: rgba(224,90,43,0.12);
+    border: 1px solid rgba(224,90,43,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .pdf-icon svg {
+    width: 20px; height: 20px;
+    stroke: #e05a2b; fill: none; stroke-width: 2;
+  }
+
+  .pdf-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 3px;
+  }
+
+  .pdf-desc {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,0.4);
+    margin: 0;
+  }
+</style>
 </head>
 <body>
+
 <div id="particles-js"></div>
+
 <header>
-<div class="home-button">
+  <div class="home-button">
     <a href="../index.html">
-    <div class="header-logo">
-<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-    <rect x="2" y="6" width="20" height="12" rx="2"></rect>
-    <path d="M7 17v-5h10v5M6 12h12"></path>
-</svg>
-<span style="color:white;">ElektroKlein</span>
-    </div>
+      <div class="header-logo">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+          <path d="M7 17v-5h10v5M6 12h12"></path>
+        </svg>
+        <span style="color:white;">ElektroKlein</span>
+      </div>
     </a>
-</div>
-<h1 class="header-title momo-trust-display-regular">Nástroje a Obchody</h1>
-<div class="header-nav">
-<a href="../index.html">Projekty</a>
-<a href="../pages/tools.html">Pomůcky</a>
-<a href="../pages/about.html">O mně</a>
-<a href="../pages/contact.html">Kontakt</a>
-</div>
+  </div>
+  <h1 class="header-title momo-trust-display-regular">Pomůcky</h1>
+  <div class="header-nav">
+    <a href="../index.html#projects">Projekty</a>
+    <a href="tools.html">Pomůcky</a>
+    <a href="about.html">O mně</a>
+    <a href="contact.html">Kontakt</a>
+  </div>
 </header>
 
-<section class="section-box">
-<h2>Používané nástroje</h2>
-<p class="project-desc">Přehled programů pro design, modelování a programování – vše zdarma a snadno dostupné pro tvorbu elektro projektů.</p>
+<div class="page-outer">
+<div class="page-wrapper">
 
-<div class="tools-grid">
-    <!-- Tinkercad karta -->
-    <div class="tool-card">
-        <img src="https://www.tinkercad.com/favicon.ico" alt="Logo tinkercad" class="tool-logo">
-        <h3>Tinkercad</h3>
-        <p>Jednoduché 3D modelování a prototypování (ideální pro začátečníky).</p>
-        <a href="https://www.tinkercad.com/" target="_blank" class="tool-link">Navštívit</a>
+  <!-- Nástroje -->
+  <div class="cv-section">
+    <p class="cv-label">Používané nástroje</p>
+    <p class="section-desc">Přehled programů pro design, modelování a programování — vše zdarma a snadno dostupné pro tvorbu elektro projektů.</p>
+    <div class="cards-grid">
+
+      <a class="tool-card" href="https://www.tinkercad.com/" target="_blank">
+        <div class="tool-card-header">
+          <div class="tool-icon">
+            <img src="https://www.tinkercad.com/favicon.ico" alt="Tinkercad">
+          </div>
+          <p class="tool-name">Tinkercad</p>
+        </div>
+        <p class="tool-desc">Jednoduché 3D modelování a prototypování — ideální pro začátečníky.</p>
+        <span class="tool-link">Navštívit <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+
+      <a class="tool-card" href="https://www.kicad.org/" target="_blank">
+        <div class="tool-card-header">
+          <div class="tool-icon">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/KiCad_logo_square.svg/2048px-KiCad_logo_square.svg.png" alt="KiCad">
+          </div>
+          <p class="tool-name">KiCad</p>
+        </div>
+        <p class="tool-desc">Profesionální návrh PCB schémat a desek plošných spojů.</p>
+        <span class="tool-link">Navštívit <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+
+      <a class="tool-card" href="https://www.arduino.cc/en/software" target="_blank">
+        <div class="tool-card-header">
+          <div class="tool-icon">
+            <img src="https://cdn.worldvectorlogo.com/logos/arduino-1.svg" alt="Arduino IDE">
+          </div>
+          <p class="tool-name">Arduino IDE</p>
+        </div>
+        <p class="tool-desc">Oficiální prostředí pro programování Arduino a ESP32.</p>
+        <span class="tool-link">Navštívit <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+
     </div>
-    
-    <!-- KiCad karta -->
-    <div class="tool-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/KiCad_logo_square.svg/2048px-KiCad_logo_square.svg.png" alt="KiCad logo" class="tool-logo">
-        <h3>KiCad</h3>
-        <p>Profesionální návrh PCB schémat a desek plošných spojů.</p>
-        <a href="https://www.kicad.org/" target="_blank" class="tool-link">Navštívit</a>
+  </div>
+
+  <!-- Obchody -->
+  <div class="cv-section">
+    <p class="cv-label">Obchody se součástkami</p>
+    <p class="section-desc">Doporučené e-shopy pro ESP32, senzory a další komponenty — české pro rychlost, globální pro ceny.</p>
+    <div class="cards-grid">
+
+      <a class="tool-card" href="https://dratek.cz/" target="_blank">
+        <div class="tool-card-header">
+          <div class="tool-icon">
+            <img src="https://dratek.cz/img/dratek_cz/favicon/apple-icon-57x57.png" alt="Dratek.cz">
+          </div>
+          <p class="tool-name">Dratek.cz</p>
+        </div>
+        <p class="tool-desc">Široký výběr senzorů a displejů.</p>
+        <span class="tool-link">Navštívit <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+
+      <a class="tool-card" href="https://www.laskakit.cz/" target="_blank">
+        <div class="tool-card-header">
+          <div class="tool-icon" style="background:rgba(255,255,255,0.08);">
+            <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:#e05a2b;fill:none;stroke-width:2;">
+              <rect x="2" y="6" width="20" height="12" rx="2"/><path d="M7 17v-5h10v5M6 12h12"/>
+            </svg>
+          </div>
+          <p class="tool-name">LaskaKit.cz</p>
+        </div>
+        <p class="tool-desc">České Arduino/ESP32 sady a stavebnice.</p>
+        <span class="tool-link">Navštívit <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+
+      <a class="tool-card" href="https://www.aliexpress.com/" target="_blank">
+        <div class="tool-card-header">
+          <div class="tool-icon" style="background:rgba(255,90,0,0.15);">
+            <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:#e05a2b;fill:none;stroke-width:2;">
+              <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </div>
+          <p class="tool-name">AliExpress</p>
+        </div>
+        <p class="tool-desc">Levné komponenty pro začátečníky.</p>
+        <span class="tool-link">Navštívit <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+
     </div>
-    
-    <!-- Arduino IDE karta -->
-    <div class="tool-card">
-        <img src="https://cdn.worldvectorlogo.com/logos/arduino-1.svg" alt="Arduino logo" class="tool-logo">
-        <h3>Arduino IDE</h3>
-        <p>Oficiální prostředí pro programování Arduino a ESP32.</p>
-        <a href="https://www.arduino.cc/en/software" target="_blank" class="tool-link">Navštívit</a>
+  </div>
+
+  <!-- PDF dokumenty -->
+  <div class="cv-section">
+    <p class="cv-label">PDF dokumenty</p>
+    <p class="section-desc">Řešené příklady podle knihy Antonína Bláhovce. Vypočítal Ing. Eduard Vladislav Kulhánek — VOŠSE a SPŠE Františka Křižíka, Praha.</p>
+    <div class="pdf-grid">
+
+      <a class="pdf-card" href="../imgs/EL_prvak_Blahovec.pdf" target="_blank">
+        <div class="pdf-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <div>
+          <p class="pdf-title">Prvák</p>
+          <p class="pdf-desc">Stejnosměrné obvody · PDF</p>
+        </div>
+      </a>
+
+      <a class="pdf-card" href="../imgs/EL_druhak_Blahovec.pdf" target="_blank">
+        <div class="pdf-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <div>
+          <p class="pdf-title">Druhák</p>
+          <p class="pdf-desc">Střídavé obvody · PDF</p>
+        </div>
+      </a>
+
     </div>
+  </div>
+
 </div>
-
-<h2>Obchody se součástkami</h2>
-<p class="project-desc">Doporučené e-shopy pro ESP32, senzory a další komponenty – české pro rychlost, globální pro ceny.</p>
-
-<div class="tools-grid">
-    <!-- Dratek karta -->
-    <div class="tool-card">
-        <img src="https://dratek.cz/img/dratek_cz/favicon/apple-icon-57x57.png" alt="Dratek logo" class="tool-logo">
-        <h3>Dratek.cz</h3>
-        <p>Široký výběr senzorů a displejů.</p>
-        <a href="https://dratek.cz/" target="_blank" class="tool-link">Navštívit</a>
-    </div>
-    
-    <!-- LaskaKit karta -->
-    <div class="tool-card">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoAUOxS_AagVkdquZbr9HexH8jtBAhuNwpfw&s" alt="LaskaKit logo" class="tool-logo">
-        <h3>LaskaKit.cz</h3>
-        <p>České Arduino/ESP32 sady a stavebnice.</p>
-        <a href="https://www.laskakit.cz/" target="_blank" class="tool-link">Navštívit</a>
-    </div>
-    
-    <!-- AliExpress karta -->
-    <div class="tool-card">
-        <img src="https://logodix.com/logo/395288.png" alt="Aliexpress logo" class="tool-logo">
-        <h3>AliExpress</h3>
-        <p>Levné komponenty pro začítečníky</p>
-        <a href="https://www.aliexpress.com/" target="_blank" class="tool-link">Navštívit</a>
-    </div>
-</div>
-<h2>PDF Dokumenty</h2>
-<p class="project-desc">Zde se dají stáhnout řešené příklady podle knihy Antonína Bláhovce. Elektrotechnika 3. Řešené příklady vypočítal  Ing. Eduard Vladislav Kulhánek. Vyšší odborná a střední průmyslová škola elektrotechnická Františka Křižíka
-Praha 1 Na Příkopě 16</p>
-
-<div class="tools-grid">
-
-    <div class="tool-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/1280px-PDF_file_icon.svg.png" alt="PDF logo" class="tool-logo">
-        <h3>Prvák</h3>
-        <p>Začátky výpočtu stejnosměrných obvodů</p>
-        <a href="../imgs/EL_prvak_Blahovec.pdf" target="_blank" class="tool-link">Navštívit</a>
-    </div>
-    
-
-    <div class="tool-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/1280px-PDF_file_icon.svg.png" alt="PDF logo" class="tool-logo">
-        <h3>Druhák</h3>
-        <p>Začátky výpočtu střídavých obvodů</p>
-        <a href="../imgs/EL_druhak_Blahovec.pdf" target="_blank" class="tool-link">Navštívit</a>
-    </div>
-</div>
-
-</section>
-
-<!-- Modal lightbox (pro konzistenci) -->
-<div id="imageModal" class="modal">
-<span class="close" onclick="closeModal()">&times;</span>
-<img class="modal-content" id="modalImg">
 </div>
 
 <footer>© 2025 Dominik Klein</footer>
 
 <script src="../scripts/script.js"></script>
+<script>
+particlesJS("particles-js", {
+  particles: {
+    number: { value: 60, density: { enable: true, value_area: 800 } },
+    color: { value: "#e05a2b" },
+    shape: { type: "circle" },
+    opacity: { value: 0.18, random: true },
+    size: { value: 3, random: true },
+    line_linked: { enable: true, distance: 130, color: "#e05a2b", opacity: 0.08, width: 1 },
+    move: { enable: true, speed: 1.2, random: true, out_mode: "out" }
+  },
+  interactivity: {
+    detect_on: "canvas",
+    events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: false } }
+  },
+  retina_detect: true
+});
+</script>
 </body>
 </html>
