@@ -3,82 +3,379 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gryoskopický ovladač</title>
-<!-- Google Fonts: Roboto + Rye -->
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Rye&display=swap" rel="stylesheet">
-<link rel="icon" type="image/x-icon" href="../imgs/logoKvet-white.png">
+<title>Gyroskopický ovladač — ElektroKlein</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Rye&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <link rel="stylesheet" href="../css/style.css">
+<link rel="icon" type="image/x-icon" href="../imgs/logoKvet-white.png">
+<style>
+  .page-outer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 0 1.5rem;
+  }
+
+  .page-wrapper {
+    width: 100%;
+    max-width: 860px;
+    padding: 2.5rem 0 4rem;
+    box-sizing: border-box;
+  }
+
+  /* ── Hero ── */
+  .proj-hero {
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    margin-bottom: 2.5rem;
+  }
+
+  .proj-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    margin-bottom: 1.4rem;
+    transition: color 0.2s;
+  }
+
+  .proj-back:hover { color: #e05a2b; }
+
+  .proj-back svg {
+    width: 13px; height: 13px;
+    stroke: currentColor; fill: none; stroke-width: 2.5;
+  }
+
+  .proj-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #e05a2b;
+    margin: 0 0 0.6rem;
+  }
+
+  .proj-title {
+    font-family: 'Rye', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    color: #fff;
+    margin: 0 0 1rem;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+  }
+
+  .proj-desc {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.62);
+    max-width: 620px;
+    margin: 0 0 1.5rem;
+  }
+
+  .proj-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 22px;
+    background: #e05a2b;
+    color: #fff;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { background: #c04820; transform: translateY(-1px); }
+  .btn-primary svg { width: 14px; height: 14px; stroke: #fff; fill: none; stroke-width: 2; }
+
+  /* ── Section label ── */
+  .cv-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #e05a2b;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 1.4rem;
+  }
+
+  .cv-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+  }
+
+  .cv-section { margin-bottom: 2.8rem; }
+
+  /* ── Stats row ── */
+  .stats-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 2.8rem;
+  }
+
+  .stat-chip {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 12px 18px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+  }
+
+  .stat-value {
+    font-family: 'Rye', serif;
+    font-size: 22px;
+    color: #e05a2b;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+  }
+
+  /* ── Components list ── */
+  .components-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
+  }
+
+  .component-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+  }
+
+  .comp-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #e05a2b;
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  .comp-name { font-weight: 700; color: #fff; }
+  .comp-detail { font-size: 12px; color: rgba(255,255,255,0.45); }
+
+  /* ── Photos grid ── */
+  .photos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 10px;
+  }
+
+  .photo-item {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.04);
+    aspect-ratio: 4/3;
+  }
+
+  .photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s;
+  }
+
+  .photo-item:hover img { transform: scale(1.03); }
+
+  /* ── Popis projektu prose ── */
+  .proj-prose {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.62);
+    margin: 0;
+  }
+</style>
 </head>
 <body>
+
 <div id="particles-js"></div>
+
 <header>
-<div class="home-button">
+  <div class="home-button">
     <a href="../index.html">
-    <div class="header-logo">
-<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-    <rect x="2" y="6" width="20" height="12" rx="2"></rect>
-    <path d="M7 17v-5h10v5M6 12h12"></path>
-</svg>
-<span style="color:white;">ElektroKlein</span>
-    </div>
+      <div class="header-logo">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+          <path d="M7 17v-5h10v5M6 12h12"></path>
+        </svg>
+        <span style="color:white;">ElektroKlein</span>
+      </div>
     </a>
-</div>
-<h1 class="header-title momo-trust-display-regular">Gryoskopický ovladač</h1>
-<div class="header-nav">
-<a href="../index.html">Projekty</a>
-<a href="../pages/tools.html">Pomůcky</a>
-<a href="../pages/about.html">O mně</a>
-<a href="../pages/contact.html">Kontakt</a>
-</div>
+  </div>
+  <h1 class="header-title momo-trust-display-regular">Projekt</h1>
+  <div class="header-nav">
+    <a href="../index.html#projects">Projekty</a>
+    <a href="tools.html">Pomůcky</a>
+    <a href="about.html">O mně</a>
+    <a href="contact.html">Kontakt</a>
+  </div>
 </header>
 
-<section class="section-box">
-<h2>Popis projektu</h2>
-<p class="project-desc">Bezdrátový ovladač využívající gyroskop pro řízení pohybu externího auta. Používá ESP32 pro WiFi a Bluetooth komunikaci. Ovladač se nachází fyzicky ve dvou možnostech. První možností je využít ovladač jako handheld zařízení. Druhou možností je jej využít ve formě rukavice, obě varianty jsou zajímavé, ale jinak složité. Program je jednodušše upravitelný pro různé druhy OLED displejů. Gyroskop společně s OLED displejem jsou ovládány přes I2C knihovnu Wire.</p>
-<ul class="tech-list">
-<li><b>ESP32</b> pro WiFi komunikaci</li>
-<li><b>MPU6050</b> gyroskopický senzor</li>
-<li><b>OLED</b> displej jakéhokoliv typu</li>
-<li><b>Rezistory</b> dělič napětí pro zobrazení stavu baterie</li>
-<li><b>Regulátor</b> pro snížení nebo udržení hodnoty na logické úrovni vybraných součástek</li>
-<li><b>Tlačíko</b> pro přepínání stránek displeje</li>
-<li><b>Spínač</b> pro vypnutí a zapnutí obvodu</li>
-<li><b>TP4056</b> nabíjecí obvod pro jednoduché nabíjení USB-C</li>
-<li><b>Li-po</b> baterie, která bude živit celý obvod</li>
-</ul>
-<div class="results">Funkce: Detekce pohybu s přesností ±2°, výsledky: Úspěšné ovládání RC modelu na vzdálenost 50m.</div>
-<center><a href="https://github.com/Pito126/Gyroscopic-controller" style="text-decoration: none;" class="github-link" target="_blank">Soubory projektu</a></center>
+<div class="page-outer">
+<div class="page-wrapper">
 
-<h2>Fotky a diagramy</h2>
-<div class="images-grid">
-    <!-- 3D model PCB -->
-<img src="../project1/Gyroscopic controller - pcb.png" alt="Schéma PCB" onclick="openModal(this.src, '../project1/RukaviceOvladac__Assembly.pdf')" style="cursor: pointer;">
-<!-- Schéma -->
-<img src="../project1/Gyroscopic-controller-scheme.png" alt="Schématické zapojení" onclick="openModal(this.src, '../project1/Gyroscopic-controller-scheme-2.pdf')" style="cursor: pointer;">
-<!-- Real fotky -->
-<img src="https://i0.wp.com/randomnerdtutorials.com/wp-content/uploads/2021/01/ESP32-MPU6050-Accelerometer-Gyroscope-Temperature-Sensor.png?quality=100&strip=all&ssl=1" alt="Real foto setupu ESP32 s MPU6050" onclick="openModal(this.src, null)" style="cursor: pointer;">
-<img src="https://i0.wp.com/randomnerdtutorials.com/wp-content/uploads/2021/01/MPU-6050-Accelerometer-Gyroscope-Temperature-Sensor-Demonstration.png?quality=100&strip=all&ssl=1" alt="Demonstrace real setupu" onclick="openModal(this.src, null)" style="cursor: pointer;">
+  <!-- Hero -->
+  <div class="proj-hero">
+    <a class="proj-back" href="../index.html#projects">
+      <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Zpět na projekty
+    </a>
+    <p class="proj-tag">ESP32 · MPU6050 · WiFi · Arduino</p>
+    <h2 class="proj-title">Gyroskopický ovladač</h2>
+    <p class="proj-desc">
+      Bezdrátový ovladač využívající gyroskop pro řízení pohybu RC modelu. Dostupný jako handheld zařízení i jako rukavice — obě varianty jsou zajímavé, ale jinak složité.
+    </p>
+    <div class="proj-actions">
+      <a class="btn-primary" href="https://github.com/Pito126/Gyroscopic-controller" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        GitHub repozitář
+      </a>
+    </div>
+  </div>
 
-</div>
-</section>
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat-chip">
+      <span class="stat-value">50m</span>
+      <span class="stat-label">Dosah WiFi</span>
+    </div>
+    <div class="stat-chip">
+      <span class="stat-value">±2°</span>
+      <span class="stat-label">Přesnost gyroskopu</span>
+    </div>
+    <div class="stat-chip">
+      <span class="stat-value">I2C</span>
+      <span class="stat-label">Komunikace senzorů</span>
+    </div>
+    <div class="stat-chip">
+      <span class="stat-value">USB-C</span>
+      <span class="stat-label">Nabíjení</span>
+    </div>
+  </div>
 
-<!-- Modal lightbox -->
-<div id="imageModal" class="modal">
-<span class="close" onclick="closeModal()">&times;</span>
-<img class="modal-content" id="modalImg">
-<div class="modal-footer" id="modalFooter" style="display: none;">
-    <button id="fullViewBtn" class="tool-link">Zobrazit PDF</button>
+  <!-- Popis -->
+  <div class="cv-section">
+    <p class="cv-label">Popis projektu</p>
+    <p class="proj-prose">
+      Ovladač používá ESP32 pro WiFi komunikaci s RC modelem. Gyroskop MPU6050 společně s OLED displejem jsou ovládány přes I2C knihovnu Wire. Program je jednoduše upravitelný pro různé druhy OLED displejů. Tlačítko slouží pro přepínání stránek displeje, spínač pro vypnutí a zapnutí celého obvodu. Nabíjecí obvod TP4056 umožňuje pohodlné nabíjení přes USB-C.
+    </p>
+  </div>
+
+  <!-- Komponenty -->
+  <div class="cv-section">
+    <p class="cv-label">Komponenty</p>
+    <div class="components-grid">
+      <div class="component-item">
+        <span class="comp-dot"></span>
+        <div><div class="comp-name">ESP32</div><div class="comp-detail">WiFi komunikace</div></div>
+      </div>
+      <div class="component-item">
+        <span class="comp-dot"></span>
+        <div><div class="comp-name">MPU6050</div><div class="comp-detail">Gyroskopický senzor</div></div>
+      </div>
+      <div class="component-item">
+        <span class="comp-dot"></span>
+        <div><div class="comp-name">OLED displej</div><div class="comp-detail">Jakýkoliv typ, I2C</div></div>
+      </div>
+      <div class="component-item">
+        <span class="comp-dot"></span>
+        <div><div class="comp-name">Rezistory</div><div class="comp-detail">Dělič napětí — stav baterie</div></div>
+      </div>
+      <div class="component-item">
+        <span class="comp-dot"></span>
+        <div><div class="comp-name">Regulátor napětí</div><div class="comp-detail">Logická úroveň součástek</div></div>
+      </div>
+      <div class="component-item">
+        <span class="comp-dot"></span>
+        <div><div class="comp-name">TP4056</div><div class="comp-detail">Nabíjení USB-C</div></div>
+      </div>
+      <div class="component-item">
+        <span class="comp-dot"></span>
+        <div><div class="comp-name">Li-Po baterie</div><div class="comp-detail">Napájení celého obvodu</div></div>
+      </div>
+      <div class="component-item">
+        <span class="comp-dot"></span>
+        <div><div class="comp-name">Tlačítko + spínač</div><div class="comp-detail">Ovládání a vypínání</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fotky -->
+  <div class="cv-section">
+    <p class="cv-label">Fotky a diagramy</p>
+    <div class="photos-grid">
+      <div class="photo-item">
+        <img src="../project1/Gyroscopic controller - pcb.png" alt="Schéma PCB">
+      </div>
+      <div class="photo-item">
+        <img src="../project1/Gyroscopic-controller-scheme.png" alt="Schématické zapojení">
+      </div>
+    </div>
+  </div>
+
 </div>
 </div>
 
 <footer>© 2025 Dominik Klein</footer>
 
 <script src="../scripts/script.js"></script>
+<script>
+particlesJS("particles-js", {
+  particles: {
+    number: { value: 60, density: { enable: true, value_area: 800 } },
+    color: { value: "#e05a2b" },
+    shape: { type: "circle" },
+    opacity: { value: 0.18, random: true },
+    size: { value: 3, random: true },
+    line_linked: { enable: true, distance: 130, color: "#e05a2b", opacity: 0.08, width: 1 },
+    move: { enable: true, speed: 1.2, random: true, out_mode: "out" }
+  },
+  interactivity: {
+    detect_on: "canvas",
+    events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: false } }
+  },
+  retina_detect: true
+});
+</script>
 </body>
 </html>
-
-
-
-
-
