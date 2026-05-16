@@ -204,6 +204,12 @@
     border: 1px solid rgba(255,255,255,0.1);
     background: rgba(255,255,255,0.04);
     aspect-ratio: 4/3;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .photo-item {
+    cursor: pointer;
   }
 
   .photo-item img {
@@ -215,6 +221,119 @@
   }
 
   .photo-item:hover img { transform: scale(1.03); }
+
+  .photo-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .photo-item:hover .photo-overlay { opacity: 1; }
+
+  .photo-overlay svg {
+    width: 28px; height: 28px;
+    stroke: #fff; fill: none; stroke-width: 2;
+  }
+
+  /* ── Lightbox ── */
+  #lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+
+  #lightbox.active { display: flex; }
+
+  .lightbox-inner {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  #lightbox-img {
+    max-width: 100%;
+    max-height: 75vh;
+    object-fit: contain;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: block;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #e05a2b;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+
+  .lightbox-close svg {
+    width: 16px; height: 16px;
+    stroke: #fff; fill: none; stroke-width: 2.5;
+  }
+
+  .lightbox-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  #lightbox-caption {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.45);
+    text-transform: uppercase;
+  }
+
+  .lightbox-pdf-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 18px;
+    background: #e05a2b;
+    color: #fff;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+
+  .lightbox-pdf-btn:hover { background: #c04820; }
+
+  .lightbox-pdf-btn svg {
+    width: 13px; height: 13px;
+    stroke: #fff; fill: none; stroke-width: 2;
+  }
 
   /* ── Popis projektu prose ── */
   .proj-prose {
@@ -344,11 +463,17 @@
   <div class="cv-section">
     <p class="cv-label">Fotky a diagramy</p>
     <div class="photos-grid">
-      <div class="photo-item">
+      <div class="photo-item" onclick="openLightbox('../project1/Gyroscopic controller - pcb.png', 'Schéma PCB')">
         <img src="../project1/Gyroscopic controller - pcb.png" alt="Schéma PCB">
+        <div class="photo-overlay">
+          <svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+        </div>
       </div>
-      <div class="photo-item">
+      <div class="photo-item" onclick="openLightbox('../project1/Gyroscopic-controller-scheme.png', 'Schématické zapojení')">
         <img src="../project1/Gyroscopic-controller-scheme.png" alt="Schématické zapojení">
+        <div class="photo-overlay">
+          <svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+        </div>
       </div>
     </div>
   </div>
@@ -356,10 +481,43 @@
 </div>
 </div>
 
+<!-- Lightbox -->
+<div id="lightbox" onclick="closeLightbox(event)">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <img id="lightbox-img" src="" alt="">
+    <div class="lightbox-footer">
+      <span id="lightbox-caption"></span>
+      <a class="lightbox-pdf-btn" href="../imgs/gyroscopic-controller.pdf" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Otevřít PDF
+      </a>
+    </div>
+  </div>
+</div>
+
 <footer>© 2025 Dominik Klein</footer>
 
 <script src="../scripts/script.js"></script>
 <script>
+function openLightbox(src, caption) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox-caption').textContent = caption;
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(e) {
+  if (!e || e.target === document.getElementById('lightbox') || e.currentTarget.classList.contains('lightbox-close')) {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
 particlesJS("particles-js", {
   particles: {
     number: { value: 60, density: { enable: true, value_area: 800 } },
