@@ -9,123 +9,66 @@
 <link rel="stylesheet" href="../css/style.css">
 <link rel="icon" type="image/x-icon" href="../imgs/logoKvet-white.png">
 <style>
-  body {
-    display: block !important;
-  }
-
-  .about-page-outer {
+  .page-outer {
     width: 100%;
     display: flex;
     justify-content: center;
     box-sizing: border-box;
     padding: 0 1.5rem;
   }
-
-  .about-wrapper {
+  .page-wrapper {
     width: 100%;
-    max-width: 860px;
-    padding: 2rem 0 4rem;
+    max-width: 900px;
+    padding: 3rem 0 6rem;
     box-sizing: border-box;
   }
 
-  /* ── Hero ── */
-  .about-hero {
+  /* ── Intro ── */
+  .intro {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: auto 1fr;
+    gap: 2rem;
     align-items: center;
-    gap: 2.5rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid rgba(255,255,255,0.12);
-    margin-bottom: 2.5rem;
+    margin-bottom: 4rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
   }
-
-  .about-name {
-    font-family: 'Rye', serif;
-    font-size: clamp(2.4rem, 6vw, 4rem);
-    line-height: 1;
-    margin: 1.2rem 0 0 0;
-    color: #fff;
-    letter-spacing: -1px;
-  }
-
-  .about-name span { color: #e05a2b; }
-
-  .about-subtitle {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.5);
-    margin: 0;
-  }
-
-  .about-avatar {
-    width: 160px;
-    height: 200px;
-    border-radius: 16px;
-    border: 2px solid #e05a2b;
-    flex-shrink: 0;
-    overflow: hidden;
-  }
-
-  .about-avatar img {
-    width: 100%;
-    height: 100%;
+  .intro-photo {
+    width: 120px;
+    height: 150px;
     object-fit: cover;
     object-position: center top;
+    border: 2px solid #e05a2b;
+    flex-shrink: 0;
     display: block;
   }
-
-  /* ── Bio ── */
-  .about-bio {
-    font-family: 'Roboto', sans-serif;
-    font-size: 15px;
-    line-height: 1.8;
-    color: rgba(255,255,255,0.72);
-    margin: 0 0 2.5rem;
-    max-width: 620px;
-  }
-
-  /* ── Contact chips ── */
-  .about-contacts {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 2.8rem;
-  }
-
-  .contact-chip {
-    display: flex;
-    align-items: center;
-    gap: 7px;
+  .intro-eyebrow {
     font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: rgba(255,255,255,0.7);
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 6px;
-    padding: 6px 13px;
-    text-decoration: none;
-    transition: border-color 0.2s, background 0.2s;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #e05a2b;
+    margin: 0 0 0.6rem;
   }
-
-  .contact-chip:hover {
-    border-color: #e05a2b;
-    background: rgba(224,90,43,0.1);
+  .intro-name {
+    font-family: 'Rye', serif;
+    font-size: clamp(2rem, 5vw, 3.4rem);
     color: #fff;
+    margin: 0 0 0.8rem;
+    line-height: 1.05;
+    letter-spacing: -0.5px;
   }
-
-  .contact-chip svg {
-    width: 14px;
-    height: 14px;
-    stroke: #e05a2b;
-    fill: none;
-    stroke-width: 2;
-    flex-shrink: 0;
+  .intro-bio {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.58);
+    margin: 0;
+    max-width: 500px;
   }
 
   /* ── Section label ── */
-  .cv-label {
+  .section-label {
     font-family: 'Space Mono', monospace;
     font-size: 10px;
     letter-spacing: 3px;
@@ -134,244 +77,197 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    margin: 0 0 1.2rem;
+    margin: 0 0 3rem;
   }
-
-  .cv-label::after {
+  .section-label::after {
     content: '';
     flex: 1;
     height: 1px;
-    background: rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.08);
   }
 
-  /* ── CV section ── */
-  .cv-section { margin-bottom: 2.8rem; }
+  /* ── Timeline ── */
+  .timeline { position: relative; }
 
-  /* ── Entry (work / education) ── */
-  .cv-entry {
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 139px;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom,
+      transparent,
+      rgba(224,90,43,0.35) 5%,
+      rgba(224,90,43,0.15) 90%,
+      transparent
+    );
+  }
+
+  .tl-item {
     display: grid;
-    grid-template-columns: 130px 1fr;
-    gap: 1rem;
-    margin-bottom: 1.6rem;
+    grid-template-columns: 140px 1fr;
+    position: relative;
+    cursor: pointer;
   }
 
-  .cv-entry-date {
+  /* Date */
+  .tl-date {
+    text-align: right;
+    padding: 1.5rem 1.5rem 0 0;
+  }
+  .tl-year {
+    font-family: 'Rye', serif;
+    font-size: 1.35rem;
+    color: rgba(255,255,255,0.14);
+    display: block;
+    line-height: 1;
+    transition: color 0.3s;
+  }
+  .tl-month {
     font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: rgba(255,255,255,0.35);
-    padding-top: 3px;
-    line-height: 1.5;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.18);
+    display: block;
+    margin-top: 4px;
+    transition: color 0.3s;
   }
 
-  .cv-entry-title {
+  /* Dot on the line */
+  .tl-dot {
+    position: absolute;
+    left: 133px;
+    top: 1.7rem;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #0a0a0a;
+    border: 2px solid rgba(255,255,255,0.14);
+    z-index: 2;
+    transition: border-color 0.3s, background 0.3s, transform 0.3s;
+  }
+
+  /* Content */
+  .tl-content { padding: 1.2rem 0 0 2rem; }
+
+  .tl-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+  .tl-title {
     font-family: 'Roboto', sans-serif;
     font-size: 15px;
     font-weight: 700;
-    color: #fff;
-    margin: 0 0 3px;
-  }
-
-  .cv-entry-sub {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: #e05a2b;
-    margin: 0 0 6px;
-    letter-spacing: 0.5px;
-  }
-
-  .cv-entry-desc {
-    font-family: 'Roboto', sans-serif;
-    font-size: 13px;
-    line-height: 1.7;
-    color: rgba(255,255,255,0.58);
+    color: rgba(255,255,255,0.65);
     margin: 0;
+    flex: 1;
+    line-height: 1.35;
+    transition: color 0.3s;
   }
-
-  /* ── Skills grid ── */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 8px;
-  }
-
-  .skill-tag {
-    display: flex;
-    align-items: center;
-    gap: 9px;
+  .tl-badge {
     font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: rgba(255,255,255,0.75);
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 6px;
-    padding: 9px 13px;
-    transition: border-color 0.2s;
-  }
-
-  .skill-tag:hover { border-color: rgba(224,90,43,0.5); }
-
-  .skill-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #e05a2b;
-    flex-shrink: 0;
-  }
-
-  /* ── Two-col grid for lang + cert ── */
-  .two-col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-  }
-
-  @media (max-width: 560px) {
-    .two-col { grid-template-columns: 1fr; }
-    .cv-entry { grid-template-columns: 1fr; }
-    .cv-entry-date { padding-top: 0; }
-    .about-hero { grid-template-columns: 1fr; }
-    .about-avatar { display: none; }
-  }
-
-  /* ── Language rows ── */
-  .lang-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    font-family: 'Roboto', sans-serif;
-  }
-
-  .lang-row:last-child { border-bottom: none; }
-
-  .lang-name {
-    font-size: 14px;
-    font-weight: 700;
-    color: #fff;
-  }
-
-  .lang-level {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: rgba(255,255,255,0.45);
-  }
-
-  .lang-badge {
-    background: rgba(224,90,43,0.18);
-    color: #e05a2b;
-    border-radius: 4px;
-    padding: 2px 7px;
-    font-size: 10px;
-  }
-
-  /* ── Cert card ── */
-  .cert-card {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-    padding: 13px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 10px;
-  }
-
-  .cert-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-    background: rgba(224,90,43,0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .cert-icon svg {
-    width: 20px;
-    height: 20px;
-    stroke: #e05a2b;
-    fill: none;
-    stroke-width: 2;
-  }
-
-  .cert-name {
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    color: #fff;
-    margin: 0 0 2px;
-  }
-
-  .cert-detail {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: rgba(255,255,255,0.4);
-    margin: 0;
-  }
-
-  /* ── Strengths ── */
-  .strengths-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-  }
-
-  .strength-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 11px 14px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 8px;
-    font-family: 'Roboto', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    color: rgba(255,255,255,0.8);
-    transition: border-color 0.2s;
-  }
-
-  .strength-item:hover { border-color: rgba(224,90,43,0.4); }
-
-  .strength-item svg {
-    width: 16px;
-    height: 16px;
-    stroke: #e05a2b;
-    fill: none;
-    stroke-width: 2;
-    flex-shrink: 0;
-  }
-
-  /* ── Download btn ── */
-  .cv-download {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 2rem;
-    padding: 11px 22px;
-    background: #e05a2b;
-    color: #fff;
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
+    font-size: 9px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: background 0.2s, transform 0.15s;
+    padding: 3px 8px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .badge-edu  { background: rgba(59,130,246,0.12); color: #60a5fa; border: 1px solid rgba(59,130,246,0.22); }
+  .badge-work { background: rgba(34,197,94,0.10);  color: #4ade80; border: 1px solid rgba(34,197,94,0.2); }
+  .badge-proj { background: rgba(224,90,43,0.12);  color: #e05a2b; border: 1px solid rgba(224,90,43,0.25); }
+  .badge-cert { background: rgba(168,85,247,0.10); color: #c084fc; border: 1px solid rgba(168,85,247,0.22); }
+
+  .tl-toggle {
+    width: 16px; height: 16px;
+    stroke: rgba(255,255,255,0.18);
+    fill: none; stroke-width: 2;
+    flex-shrink: 0;
+    margin-top: 2px;
+    transition: stroke 0.3s, transform 0.35s;
   }
 
-  .cv-download:hover { background: #c04820; transform: translateY(-1px); }
+  /* Expandable */
+  .tl-body {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.3s;
+  }
+  .tl-body-inner {
+    padding: 0.9rem 0 1.8rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .tl-desc {
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.48);
+    margin: 0 0 0.9rem;
+  }
+  .tl-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .tl-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,0.45);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 4px;
+    padding: 3px 9px;
+  }
 
-  .cv-download svg {
-    width: 14px;
-    height: 14px;
-    stroke: #fff;
-    fill: none;
-    stroke-width: 2.5;
+  /* Active/hover */
+  .tl-item:hover .tl-year,
+  .tl-item.active .tl-year { color: #e05a2b; }
+  .tl-item:hover .tl-month,
+  .tl-item.active .tl-month { color: rgba(224,90,43,0.55); }
+  .tl-item:hover .tl-dot,
+  .tl-item.active .tl-dot { border-color: #e05a2b; background: #e05a2b; transform: scale(1.3); }
+  .tl-item:hover .tl-title,
+  .tl-item.active .tl-title { color: #fff; }
+  .tl-item:hover .tl-toggle,
+  .tl-item.active .tl-toggle { stroke: #e05a2b; }
+  .tl-item.active .tl-toggle { transform: rotate(45deg); }
+  .tl-item.active .tl-body { max-height: 300px; opacity: 1; }
+
+  /* ── Skills ── */
+  .skills-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 1rem;
+  }
+  .skill-pill {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 999px;
+    padding: 6px 14px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .skill-pill:hover { border-color: #e05a2b; color: #fff; }
+  .skill-dot { width: 5px; height: 5px; border-radius: 50%; background: #e05a2b; flex-shrink: 0; }
+
+  @media (max-width: 600px) {
+    .intro { grid-template-columns: 1fr; }
+    .intro-photo { width: 90px; height: 112px; }
+    .timeline::before { left: 79px; }
+    .tl-item { grid-template-columns: 80px 1fr; }
+    .tl-dot { left: 73px; }
+    .tl-year { font-size: 1rem; }
+    .tl-content { padding-left: 1.4rem; }
   }
 </style>
 </head>
@@ -393,162 +289,173 @@
   </div>
   <h1 class="header-title momo-trust-display-regular">O mně</h1>
   <div class="header-nav">
-<a href="../index.html">Projekty</a>
-<a href="../pages/tools.html">Pomůcky</a>
-<a href="../pages/about.html">O mně</a>
-<a href="../pages/contact.html">Kontakt</a>
+    <a href="../index.html#projects">Projekty</a>
+    <a href="tools.html">Pomůcky</a>
+    <a href="about.html" class="active">O mně</a>
+    <a href="contact.html">Kontakt</a>
   </div>
 </header>
 
-<div class="about-page-outer">
-<div class="about-wrapper">
+<div class="page-outer">
+<div class="page-wrapper">
 
-  <!-- Hero -->
-  <div class="about-hero">
+  <!-- Intro -->
+  <div class="intro">
+    <img class="intro-photo" src="../imgs/dominikklein-cv.jpg" alt="Dominik Klein">
     <div>
-      <p class="about-subtitle">Electrical Engineering Student</p>
-      <h2 class="about-name">Dominik<br><span>Klein</span></h2>
-    </div>
-    <div class="about-avatar">
-      <img src="../imgs/dominikklein-cv.jpg" alt="Dominik Klein">
+      <p class="intro-eyebrow">Electrical Engineering Student</p>
+      <h2 class="intro-name">Dominik<br>Klein</h2>
+      <p class="intro-bio">Motivovaný student elektrotechniky z Lovosic. Zajímá mě průmyslová automatizace, mikrokontroléry a tvorba věcí co skutečně fungují — od ESP32 projektů po dřevařské řemeslo.</p>
     </div>
   </div>
 
-  <!-- Bio -->
-  <p class="about-bio">
-    Motivovaný student elektrotechniky se zaměřením na průmyslovou automatizaci a počítačové aplikace.
-    Mám praktické zkušenosti s mikrokontroléry Arduino a ESP32, elektroinstalacemi i dřevařstvím.
-    Rychle se učím, pracuji spolehlivě a rád přispívám v technickém prostředí.
-  </p>
+  <!-- Timeline -->
+  <p class="section-label">Životní linie</p>
 
-  <!-- Kontakty -->
-  <div class="about-contacts">
-    <a class="contact-chip" href="tel:+420777527459">
-      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.11 19a19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-2.87-8.72A2 2 0 0 1 4.22 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-      +420 777 527 459
-    </a>
-    <a class="contact-chip" href="mailto:dom.klein@seznam.cz">
-      <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      dom.klein@seznam.cz
-    </a>
-    <a class="contact-chip" href="#">
-      <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-      Lovosice, Czech Republic
-    </a>
-    <a class="contact-chip" href="https://github.com/Pito126" target="_blank">
-      <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-      Pito126
-    </a>
-  </div>
+  <div class="timeline">
 
-  <!-- Vzdělání -->
-  <div class="cv-section">
-    <p class="cv-label">Vzdělání</p>
-    <div class="cv-entry">
-      <div class="cv-entry-date">2022 — 2026</div>
-      <div>
-        <p class="cv-entry-title">SPŠ Resslova 5, Ústí nad Labem</p>
-        <p class="cv-entry-sub">Elektrotechnika · průmyslová automatizace a počítačové aplikace</p>
-        <p class="cv-entry-desc">Maturitní obor s důrazem na praktické aplikace elektrotechniky, průmyslovou automatizaci a programování.</p>
+    <div class="tl-item" onclick="toggleItem(this)">
+      <div class="tl-date">
+        <span class="tl-year">2026</span>
+        <span class="tl-month">Jaro</span>
       </div>
-    </div>
-  </div>
-
-  <!-- Pracovní zkušenosti -->
-  <div class="cv-section">
-    <p class="cv-label">Pracovní zkušenosti</p>
-    <div class="cv-entry">
-      <div class="cv-entry-date">2024 —<br>současnost</div>
-      <div>
-        <p class="cv-entry-title">Brigádník — Dřevařské centrum Jiří Novák</p>
-        <p class="cv-entry-sub">Woodworking & Retail</p>
-        <p class="cv-entry-desc">Práce s dřevem různými technikami a obsluha zákazníků v maloobchodním prostředí. Spolehlivý přístup k práci a silné komunikační dovednosti.</p>
-      </div>
-    </div>
-    <div class="cv-entry">
-      <div class="cv-entry-date">2024</div>
-      <div>
-        <p class="cv-entry-title">Brigádník — Elektroslužby Petr Dlouhý</p>
-        <p class="cv-entry-sub">Electrical Services</p>
-        <p class="cv-entry-desc">Asistence při elektroinstalačních pracích.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Dovednosti -->
-  <div class="cv-section">
-    <p class="cv-label">Dovednosti</p>
-    <div class="skills-grid">
-      <div class="skill-tag"><span class="skill-dot"></span>C++ / Arduino</div>
-      <div class="skill-tag"><span class="skill-dot"></span>ESP32 / WiFi</div>
-      <div class="skill-tag"><span class="skill-dot"></span>HTML / CSS</div>
-      <div class="skill-tag"><span class="skill-dot"></span>MS Word / Excel</div>
-      <div class="skill-tag"><span class="skill-dot"></span>MS PowerPoint</div>
-      <div class="skill-tag"><span class="skill-dot"></span>Adobe Photoshop</div>
-      <div class="skill-tag"><span class="skill-dot"></span>Adobe Premiere</div>
-      <div class="skill-tag"><span class="skill-dot"></span>Základy elektrotechniky</div>
-    </div>
-  </div>
-
-  <!-- Silné stránky -->
-  <div class="cv-section">
-    <p class="cv-label">Silné stránky</p>
-    <div class="strengths-grid">
-      <div class="strength-item">
-        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        Zákaznické služby
-      </div>
-      <div class="strength-item">
-        <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-        Hands-on & technický
-      </div>
-      <div class="strength-item">
-        <svg viewBox="0 0 24 24"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        Chutí se učit
-      </div>
-      <div class="strength-item">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
-        Pozitivní přístup
-      </div>
-    </div>
-  </div>
-
-  <!-- Jazyky + Certifikáty -->
-  <div class="two-col">
-    <div class="cv-section">
-      <p class="cv-label">Jazyky</p>
-      <div class="lang-row">
-        <span class="lang-name">Čeština</span>
-        <span class="lang-level">Rodilý mluvčí</span>
-      </div>
-      <div class="lang-row">
-        <span class="lang-name">Angličtina</span>
-        <span class="lang-level">
-          <span class="lang-badge">B2</span>
-          Upper-Intermediate
-        </span>
-      </div>
-    </div>
-
-    <div class="cv-section">
-      <p class="cv-label">Certifikáty</p>
-      <div class="cert-card">
-        <div class="cert-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+      <span class="tl-dot"></span>
+      <div class="tl-content">
+        <div class="tl-header">
+          <p class="tl-title">Maturita — SPŠ Resslova, Ústí nad Labem</p>
+          <span class="tl-badge badge-edu">Vzdělání</span>
+          <svg class="tl-toggle" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </div>
-        <div>
-          <p class="cert-name">Cambridge B2 First</p>
-          <p class="cert-detail">First for Schools · Skóre 166</p>
-        </div>
+        <div class="tl-body"><div class="tl-body-inner">
+          <p class="tl-desc">Závěrečná zkouška maturitního oboru Elektrotechnika se zaměřením na průmyslovou automatizaci a počítačové aplikace.</p>
+          <div class="tl-tags">
+            <span class="tl-tag">Elektrotechnika</span><span class="tl-tag">Průmyslová automatizace</span><span class="tl-tag">Počítačové aplikace</span>
+          </div>
+        </div></div>
       </div>
     </div>
+
+    <div class="tl-item" onclick="toggleItem(this)">
+      <div class="tl-date">
+        <span class="tl-year">2024</span>
+        <span class="tl-month">Průběžně</span>
+      </div>
+      <span class="tl-dot"></span>
+      <div class="tl-content">
+        <div class="tl-header">
+          <p class="tl-title">Brigádník — Dřevařské centrum Jiří Novák</p>
+          <span class="tl-badge badge-work">Práce</span>
+          <svg class="tl-toggle" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="tl-body"><div class="tl-body-inner">
+          <p class="tl-desc">Práce s dřevem různými technikami a obsluha zákazníků. Vedení brigádních směn jako tým lídr.</p>
+          <div class="tl-tags">
+            <span class="tl-tag">Dřevařské techniky</span><span class="tl-tag">Zákaznický servis</span><span class="tl-tag">Tým lídr</span>
+          </div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="tl-item" onclick="toggleItem(this)">
+      <div class="tl-date">
+        <span class="tl-year">2024</span>
+        <span class="tl-month">Léto</span>
+      </div>
+      <span class="tl-dot"></span>
+      <div class="tl-content">
+        <div class="tl-header">
+          <p class="tl-title">Brigádník — Elektroslužby Petr Dlouhý</p>
+          <span class="tl-badge badge-work">Práce</span>
+          <svg class="tl-toggle" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="tl-body"><div class="tl-body-inner">
+          <p class="tl-desc">Asistence při elektroinstalačních pracích. Získání praktických zkušeností s elektrickými obvody v reálném prostředí.</p>
+          <div class="tl-tags">
+            <span class="tl-tag">Elektroinstalace</span><span class="tl-tag">Nízkonapěťové obvody</span><span class="tl-tag">Tým lídr</span>
+          </div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="tl-item" onclick="toggleItem(this)">
+      <div class="tl-date">
+        <span class="tl-year">2024</span>
+        <span class="tl-month">Projekt</span>
+      </div>
+      <span class="tl-dot"></span>
+      <div class="tl-content">
+        <div class="tl-header">
+          <p class="tl-title">Gyroskopický ovladač — ESP32 + MPU6050</p>
+          <span class="tl-badge badge-proj">Projekt</span>
+          <svg class="tl-toggle" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="tl-body"><div class="tl-body-inner">
+          <p class="tl-desc">Bezdrátový WiFi ovladač s gyroskopem pro řízení RC modelu. Přesnost ±2°, dosah 50m. Open-source na GitHubu.</p>
+          <div class="tl-tags">
+            <span class="tl-tag">ESP32</span><span class="tl-tag">MPU6050</span><span class="tl-tag">WiFi</span><span class="tl-tag">C++</span><span class="tl-tag">I2C</span>
+          </div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="tl-item" onclick="toggleItem(this)">
+      <div class="tl-date">
+        <span class="tl-year">2023</span>
+        <span class="tl-month">Certifikát</span>
+      </div>
+      <span class="tl-dot"></span>
+      <div class="tl-content">
+        <div class="tl-header">
+          <p class="tl-title">Cambridge B2 First for Schools</p>
+          <span class="tl-badge badge-cert">Certifikát</span>
+          <svg class="tl-toggle" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="tl-body"><div class="tl-body-inner">
+          <p class="tl-desc">Mezinárodní certifikát anglického jazyka na úrovni B2. Skóre 166 na Cambridge English Scale.</p>
+          <div class="tl-tags">
+            <span class="tl-tag">Angličtina B2</span><span class="tl-tag">Cambridge English</span><span class="tl-tag">Skóre 166</span>
+          </div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="tl-item" onclick="toggleItem(this)">
+      <div class="tl-date">
+        <span class="tl-year">2022</span>
+        <span class="tl-month">Září</span>
+      </div>
+      <span class="tl-dot"></span>
+      <div class="tl-content">
+        <div class="tl-header">
+          <p class="tl-title">Nástup na SPŠ Resslova, Ústí nad Labem</p>
+          <span class="tl-badge badge-edu">Vzdělání</span>
+          <svg class="tl-toggle" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="tl-body"><div class="tl-body-inner">
+          <p class="tl-desc">Zahájení studia elektrotechniky. Start cesty do světa mikrokontrolérů, programování a elektrotechniky.</p>
+          <div class="tl-tags">
+            <span class="tl-tag">SPŠ Resslova</span><span class="tl-tag">Ústí nad Labem</span><span class="tl-tag">Elektrotechnika</span>
+          </div>
+        </div></div>
+      </div>
+    </div>
+
   </div>
 
-  <!-- Download -->
-  <a class="cv-download" href="../imgs/dominikklein-cv.pdf" target="_blank">
-    <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-    Stáhnout CV (PDF)
-  </a>
+  <!-- Skills -->
+  <p class="section-label" style="margin-top:3.5rem;">Dovednosti</p>
+  <div class="skills-strip">
+    <div class="skill-pill"><span class="skill-dot"></span>C++ / Arduino</div>
+    <div class="skill-pill"><span class="skill-dot"></span>ESP32 / WiFi</div>
+    <div class="skill-pill"><span class="skill-dot"></span>HTML / CSS</div>
+    <div class="skill-pill"><span class="skill-dot"></span>Adobe Photoshop</div>
+    <div class="skill-pill"><span class="skill-dot"></span>Adobe Premiere</div>
+    <div class="skill-pill"><span class="skill-dot"></span>MS Office</div>
+    <div class="skill-pill"><span class="skill-dot"></span>Základy elektrotechniky</div>
+    <div class="skill-pill"><span class="skill-dot"></span>Dřevařské techniky</div>
+    <div class="skill-pill"><span class="skill-dot"></span>Čeština — rodilý</div>
+    <div class="skill-pill"><span class="skill-dot"></span>Angličtina — B2</div>
+  </div>
 
 </div>
 </div>
@@ -557,6 +464,12 @@
 
 <script src="../scripts/script.js"></script>
 <script>
+function toggleItem(el) {
+  const isActive = el.classList.contains('active');
+  document.querySelectorAll('.tl-item.active').forEach(i => i.classList.remove('active'));
+  if (!isActive) el.classList.add('active');
+}
+
 particlesJS("particles-js", {
   particles: {
     number: { value: 60, density: { enable: true, value_area: 800 } },
